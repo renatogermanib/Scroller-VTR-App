@@ -22,13 +22,13 @@ class HoverButton(Button):
 
 i=0
 
-def scroll(): #función relacionada al boton =
+def scroll(*events): #función relacionada al boton =
 	global i
 	i += 14
 	Resultado.delete(0, END)
 	Resultado.insert(0,i)
 
-def rollback():
+def rollback(*events):
 	global i
 	if i != 0:
 		i -= 14
@@ -39,7 +39,7 @@ def rollback():
 		Resultado.delete(0, END)
 		Resultado.insert(0,i)
 
-def reset():
+def reset(*events):
 	global i
 	Resultado.delete(0, END)
 	i=0
@@ -63,6 +63,9 @@ reset_button.grid(column =1, row=3, pady=4,padx=7)
 Resultado = Entry(ventana, bg='gray', width=10, relief='groove', font =('Bahnschrift',20), justif='center')
 Resultado.grid(columnspan=10 , row=4, pady=3,padx=1, ipadx=1, ipady=1)
 
+ventana.bind('<space>', scroll)
+ventana.bind('<BackSpace>', rollback)
+ventana.bind('<Delete>', reset)
 ventana.mainloop()
 
 # < >
